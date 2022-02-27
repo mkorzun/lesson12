@@ -1,0 +1,32 @@
+--
+version: '3.9'
+services:
+  tomcat:
+    image: tomcat:7.0
+    ports:
+      - "8081:8080"
+    volumes:
+      - data1:/usr/local/tomcat/webapps
+      - data2:/usr/local/tomcat/ROOT
+  maven:
+    build: build
+    volumes:
+      - data1:/apps/webapps
+      - data2:/apps/root
+  db:
+    image: mysql:5.5
+    hostname: db
+    volumes:
+      - db_data:/var/lib/mysql
+    ports:
+      - "3306:3306"
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: BgsRnj424Dgd
+      MYSQL_DATABASE: App42PaaS-Java-MySQL
+      MYSQL_USER: userapp
+      MYSQL_PASSWORD: Vhe32SdcdAs
+volumes:
+  data1:
+  data2:
+  db_data:
